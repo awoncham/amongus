@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const token = process.env.token;
+const token = "NzU4MTMwNTE2ODMzODYxNjk0.X2qeEA.BXlAEbNJt7_UULFniN_Y71GXXrM";
 const welcomeChannelName = "👋｜환영합니다";
 
 client.on('ready', () => {
@@ -23,47 +23,6 @@ client.on("guildMemberAdd", (member) => {
       .setDescription(`<${user.tag} 님이 **\`어몽어스 코리아 디스코드\`** 서버에 입장하셨습니다`)
       
     welcomeChannel.send(embed);
-});
-
-client.on('message', message => {
-  if (!message.guild) return;
-
-  if (message.content.startsWith('.킥')) {
-    const user = message.mentions.users.first();
-    if (user) {
-      const member = message.guild.member(user);
-      if (member) {
-        member
-          .then(() => {
-            let embed = new.discord.RichEmbed()
-              .setColor('F08080')
-              .setDescription(`성공적으로 ${user.tag} 님을 추방하였습니다`);
-
-            message.channel.send(embed);
-          })
-          .catch(err => {
-            let embed = new.discord.RichEmbed()
-              .setColor('F08080')
-              .setDescription(`이 유저를 추방할 수가 없습니다`);
-
-              message.channel.send(embed);
-            console.error(err);
-          });
-      } else {
-        let embed = new.discord.RichEmbed()
-        .setColor('F08080')
-        .setDescription(`그 유저는 이 서버에 가입되어 있지 않습니다!`);
-
-        message.channel.send(embed);
-      }
-    } else {
-      let embed = new.discord.RichEmbed()
-      .setColor('F08080')
-      .setDescription(`멘션이 되지 않았습니다!`);
-
-      message.channel.send(embed);
-    }
-  }
 });
 
 client.on('raw', event => {
